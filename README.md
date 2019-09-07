@@ -24,4 +24,8 @@ A fully customizable and accessable react modal with hook primitives.
 
 <!-- ## Credits -->
 
+https://github.com/reactjs/react-modal
+https://github.com/davidtheclark/tabbable/blob/master/index.js
+https://github.com/davidtheclark/focus-trap#focustrap--createfocustrapelement-createoptions
+
 <!-- ## License -->

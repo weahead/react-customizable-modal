@@ -1,13 +1,11 @@
-//https://github.com/davidtheclark/tabbable/blob/master/index.js
-// https://github.com/davidtheclark/focus-trap#focustrap--createfocustrapelement-createoptions
-
 import { useState, useEffect, useCallback, useRef } from "react";
+//@ts-ignore
 import findTabbable from "helpers/tabbable";
 
 const TAB_KEY = 9;
 
 export function useTrapFocus() {
-  const ref = useRef<HTMLInputElement>(null);
+  const ref = useRef<HTMLInputElement>(null); //TODO: this might not be a HTMLInputElement element, say that you put the ref on a div, what do we do ?
   const previouseFocusedElement = useRef<Element>(document.activeElement);
   const [tabbableElements, setTabbableElements] = useState<HTMLInputElement[]>(
     []
