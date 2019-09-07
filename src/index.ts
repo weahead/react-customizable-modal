@@ -1,7 +1,3 @@
-export { useModal } from "hooks/useModal";
-export { useAriaHide } from "hooks/useAriaHide";
-export { useTrapFocus } from "hooks/useTrapFocus";
-
-export function add(a: number, b: number) {
-  return a + b;
-}
+export { useModal } from "./hooks/useModal";
+export { useAriaHide } from "./hooks/useAriaHide";
+export { useTrapFocus } from "./hooks/useTrapFocus";
