@@ -33,18 +33,21 @@ export function useTrapFocus() {
       const first = tabbableElements[0];
       const last = tabbableElements[tabbableElements.length - 1];
       const currentActiveElement = document.activeElement;
+      // Scope current tabs to current root element
       if (isWithinCurrentElementScope([...tabbableElements, ref.current])) {
         if (keyCode === TAB_KEY) {
           if (
             currentActiveElement === first ||
             currentActiveElement === ref.current
           ) {
+            // move focus to last element if shift+tab while currently focusing the first tabbable element
             if (shiftKey) {
               event.preventDefault();
               last.focus();
             }
           }
           if (currentActiveElement === last) {
+            // move focus back to first if tabbing while currently focusing the last tabbable element
             if (!shiftKey) {
               event.preventDefault();
               first.focus();
