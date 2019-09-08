@@ -14,12 +14,8 @@ export function useTrapFocus() {
     const { current } = ref;
     if (current) {
       const focusableChildNodes = findTabbable(current);
-      console.log(current);
-      if (tabbable(current)) {
-        current.focus();
-      } else {
-        focusableChildNodes[0].focus();
-      }
+      current.focus();
+
       setTabbableElements(focusableChildNodes);
     }
     return () => {
