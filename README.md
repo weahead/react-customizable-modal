@@ -2,6 +2,10 @@
 
 A fully customizable and accessable react modal with hook primitives.
 
+# WIP
+
+Not ready
+
 <!-- ## Build status -->
 
 <!-- ## Motivation -->
