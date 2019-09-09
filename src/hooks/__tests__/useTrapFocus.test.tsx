@@ -24,24 +24,33 @@ describe("useTrapFocus", () => {
     const activeElement = document.activeElement as HTMLElement;
     expect(activeElement.getAttribute("id")).toEqual("container");
   });
-  it("should focus on the first focusable element if the container element is not focusable", () => {
-    function TestComponent2() {
-      const elementRef = useTrapFocus();
-      return (
-        <div ref={elementRef} id={"container"}>
-          <input id={"first-input"} type={"text"} />
-          <button>submit</button>
-        </div>
-      );
-    }
-    const {
-      queryByText,
-      getByLabelText,
-      getByText,
-      baseElement,
-      debug
-    } = render(<TestComponent2></TestComponent2>);
-    const activeElement = document.activeElement as HTMLElement;
-    expect(activeElement.getAttribute("id")).toEqual("first-input");
-  });
+});
+it("should loop focus back to the first element on tab", () => {
+  function TestComponent2() {
+    const elementRef = useTrapFocus();
+    return (
+      <div
+        ref={elementRef}
+        id={"container"}
+        data-testId={"container"}
+        tabIndex={-1}
+      >
+        <input id={"first-input"} type={"text"} />
+        <button>submit</button>
+      </div>
+    );
+  }
+  const {
+    queryByText,
+    getByLabelText,
+    getByText,
+    baseElement,
+    debug,
+    getByTestId
+  } = render(<TestComponent2></TestComponent2>);
+  const container = getByTestId("container");
+  fireEvent.keyDown(container, { key: "Tab", code: 9 });
+  fireEvent.keyDown(container, { key: "Tab", code: 9 });
+  const activeElement = document.activeElement as HTMLElement;
+  expect(activeElement.getAttribute("id")).toEqual("first-input");
 });

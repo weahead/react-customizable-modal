@@ -6,7 +6,9 @@ const TAB_KEY = 9;
 
 export function useTrapFocus() {
   const ref = useRef<HTMLDivElement>(null);
-  const previouseFocusedElement = useRef<Element>(document.activeElement);
+  const previouseFocusedElement = useRef<HTMLElement>(
+    document.activeElement as HTMLElement
+  );
   const [tabbableElements, setTabbableElements] = useState<HTMLElement[]>([]);
   // Handle initial focus of the referenced element, and return focus to previously focused element on cleanup
   // and find all the tabbable elements in the referenced element
@@ -14,6 +16,7 @@ export function useTrapFocus() {
     const { current } = ref;
     if (current) {
       const focusableChildNodes = findTabbable(current);
+      console.log(focusableChildNodes);
       current.focus();
 
       setTabbableElements(focusableChildNodes);
