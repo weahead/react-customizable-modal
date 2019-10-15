@@ -16,7 +16,6 @@ export function useTrapFocus() {
     const { current } = ref;
     if (current) {
       const focusableChildNodes = findTabbable(current);
-      console.log(focusableChildNodes);
       current.focus();
 
       setTabbableElements(focusableChildNodes);
@@ -34,7 +33,6 @@ export function useTrapFocus() {
       const first = tabbableElements[0];
       const last = tabbableElements[tabbableElements.length - 1];
       const currentActiveElement = document.activeElement;
-      console.log("object");
       // Scope current tabs to current root element
       if (isWithinCurrentElementScope([...tabbableElements, ref.current])) {
         if (keyCode === TAB_KEY) {
