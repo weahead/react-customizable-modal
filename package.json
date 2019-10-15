@@ -31,6 +31,9 @@
   "peerDependencies": {
     "react": ">=16.9.0"
   },
+  "files": [
+    "lib"
+  ],
   "devDependencies": {
     "@testing-library/jest-dom": "^4.1.0",
     "@testing-library/react": "^9.1.4",
@@ -39,7 +42,7 @@
     "jest": "^24.9.0",
     "react": "^16.9.0",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.6.2"
+    "typescript": "^3.6.4"
   },
   "dependencies": {
     "react-dom": "^16.9.0"
