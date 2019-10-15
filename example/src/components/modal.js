@@ -1,9 +1,11 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import { useTrapFocus } from "react-customizable-modal";
 
 export default function Modal({ onClose }) {
+  const domNode = document.getElementById("modal-root");
   const trapRef = useTrapFocus();
-  return (
+  return ReactDOM.createPortal(
     <div
       style={{
         display: "flex",
@@ -33,6 +35,7 @@ export default function Modal({ onClose }) {
         <input></input>
         <button onClick={onClose}>Close modal</button>
       </div>
-    </div>
+    </div>,
+    domNode
   );
 }
