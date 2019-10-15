@@ -1,40 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { useTrapFocus } from "react-customizable-modal";
+import Modal from "./components/modal";
 function App() {
-  const trapRef = useTrapFocus();
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div className="App" ref={trapRef}>
+    <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          onClick={() => {
+            setIsOpen(true);
+          }}
         >
-          Learn React
-        </a>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+          Open modal
+        </button>
+        {isOpen && (
+          <Modal
+            onClose={() => {
+              setIsOpen(false);
+            }}
+          ></Modal>
+        )}
       </header>
     </div>
   );
