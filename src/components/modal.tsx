@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function modal() {
+export default function Modal() {
   return <div>asdf</div>;
 }
