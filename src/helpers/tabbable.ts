@@ -37,13 +37,11 @@ function visible(element: any) {
 
 export function focusable(element: HTMLElement, isTabIndexNotNaN: boolean) {
   const nodeName = element.nodeName.toLowerCase();
-  console.log(element);
   const res =
     //@ts-ignore
     (tabbableNode.test(nodeName) && !element.disabled) ||
     //@ts-ignore
     (nodeName === "a" ? element.href || isTabIndexNotNaN : isTabIndexNotNaN);
-  debugger;
   return res && visible(element);
 }
 
