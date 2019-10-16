@@ -41,6 +41,24 @@ function App() {
             }}
           ></AnimatedModal>
         )}
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
       </header>
     </div>
   );
