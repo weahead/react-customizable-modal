@@ -52,5 +52,5 @@ it("should loop focus back to the first element on tab", () => {
   fireEvent.keyDown(container, { key: "Tab", code: 9 });
   fireEvent.keyDown(container, { key: "Tab", code: 9 });
   const activeElement = document.activeElement as HTMLElement;
-  expect(activeElement.getAttribute("id")).toEqual("first-input");
+  expect(activeElement.getAttribute("id")).toEqual("container");
 });
