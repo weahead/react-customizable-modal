@@ -40,26 +40,6 @@ function App(){
 
 ```
 
-### Hook Modal
-
-```jsx
-import {useModal, ModalPortal} from '@weahead/react-customizable-modal'
-
-function App(){
-    const [isOpen, setIsOpen] = useState(false)
-    const modalProps = useModal({onClose:()=>{setIsOpen(false)},closeOnEsc:true})
-    return(
-        <div>
-            <button onClick={()=>{setIsOpen(true)}}>Open modal</button>
-            <ModalPortal>
-                <MyCustomModal {...modalProps}>
-            </ModalPortal>
-        </div>
-    )
-}
-
-```
-
 ### Custom Modal with custom overlay
 
 ```jsx
@@ -80,8 +60,25 @@ function App() {
       >
         Open modal
       </button>
-      ...
+      {isOpen && (
+        <Modal
+          onClose={() => {
+            setIsOpen(false);
+          }}
+        />
+      )}
     </div>
+  );
+}
+
+function Modal({ onClose }) {
+  return (
+    <ModalPortal>
+      <div>
+        This is my modal
+        <button onClick={onClose}>Close</button>
+      </div>
+    </ModalPortal>
   );
 }
 ```

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { useTrapFocus } from "react-customizable-modal";
 import Modal from "./components/modal";
 import AnimatedModal from "./components/animatedModal";
 import WobblyModal from "./components/wobblyModal";

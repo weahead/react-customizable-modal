@@ -1,5 +1,5 @@
 import React from "react";
-import { useSpring, animated, config } from "react-spring";
+import { useSpring, animated } from "react-spring";
 import { useTrapFocus, useBodyScrollLock } from "react-customizable-modal";
 
 export default function AnimatedModal({ onClose }) {
