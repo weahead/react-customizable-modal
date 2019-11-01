@@ -2,7 +2,7 @@ import React from "react";
 import { useSpring, animated, config } from "react-spring";
 import { useTrapFocus, useBodyScrollLock } from "react-customizable-modal";
 
-export default function AnimatedModal({ onClose }) {
+export default function WobblyModal({ onClose }) {
   useBodyScrollLock();
   const modalRef = useTrapFocus();
   const overlayProps = useSpring({
@@ -12,7 +12,7 @@ export default function AnimatedModal({ onClose }) {
   const modalProps = useSpring({
     transform: "scale(1)",
     from: { transform: "scale(0)" },
-    config: { mass: 1, tension: 280, friction: 25 }
+    config: config.wobbly
   });
   return (
     <animated.div
