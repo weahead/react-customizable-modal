@@ -1,10 +1,14 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 //@ts-ignore
 import findTabbable, { tabbable } from "../helpers/tabbable";
+import { useHandleKeyPress } from "./useHandleKeyPress";
 
 const TAB_KEY = 9;
 
-export function useTrapFocus() {
+export function useTrapFocus(options: {
+  focusOnRender: boolean
+  returnFocus: boolean
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const previouseFocusedElement = useRef<HTMLElement>(
     document.activeElement as HTMLElement
@@ -16,12 +20,14 @@ export function useTrapFocus() {
     const { current } = ref;
     if (current) {
       const focusableChildNodes = findTabbable(current);
-      current.focus();
+      if (options.focusOnRender) {
+        current.focus();
+      }
 
       setTabbableElements(focusableChildNodes);
     }
     return () => {
-      if (previouseFocusedElement.current instanceof HTMLElement) {
+      if (previouseFocusedElement.current instanceof HTMLElement && options.returnFocus) {
         previouseFocusedElement.current.focus();
       }
     };
@@ -58,12 +64,8 @@ export function useTrapFocus() {
     },
     [ref, tabbableElements]
   );
-  useEffect(() => {
-    window.addEventListener("keydown", handleUserKeyPress);
-    return () => {
-      window.removeEventListener("keydown", handleUserKeyPress);
-    };
-  }, [handleUserKeyPress]);
+  useHandleKeyPress(handleUserKeyPress)
+
   return ref;
 }
 function isWithinCurrentElementScope(
