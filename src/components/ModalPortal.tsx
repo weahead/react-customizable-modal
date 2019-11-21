@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 
 interface Props {
@@ -6,13 +6,28 @@ interface Props {
 }
 
 export const ModalPortal: React.FC<Props> = ({ id, children }) => {
+
+  const domNode = useRef<HTMLElement>(getOrCreateElementById(id));
+  console.log(domNode)
+  useEffect(() => {
+
+    return () => {
+      // remove the div on unmount
+      document.body.removeChild(domNode.current)
+    };
+  }, [id])
+  return ReactDOM.createPortal(children, domNode.current)
+
+};
+
+function getOrCreateElementById(id: string): HTMLElement {
   const domNode = document.getElementById(id);
   if (domNode) {
-    return ReactDOM.createPortal(children, domNode);
+    return domNode;
+  } else {
+    let element = document.createElement("div");
+    element.id = id;
+    document.body.appendChild(element);
+    return element
   }
-  // there is no domnode with the id passed in
-  let element = document.createElement("div");
-  element.id = id;
-  document.body.appendChild(element);
-  return ReactDOM.createPortal(children, element);
-};
+}
