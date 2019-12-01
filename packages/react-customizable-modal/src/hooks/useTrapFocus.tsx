@@ -5,10 +5,11 @@ import { useHandleKeyPress } from "./useHandleKeyPress";
 
 const TAB_KEY = 9;
 const optionsDefault = { focusOnRender: true, returnFocus: true };
-export function useTrapFocus(opts: {
-  focusOnRender: boolean;
-  returnFocus: boolean;
-}) {
+type optionsType = {
+  focusOnRender?: boolean;
+  returnFocus?: boolean;
+};
+export function useTrapFocus(opts?: optionsType) {
   const options = opts ? { ...optionsDefault, ...opts } : optionsDefault;
   const ref = useRef<HTMLDivElement>(null);
   const previouseFocusedElement = useRef<HTMLElement>(
