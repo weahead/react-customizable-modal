@@ -43,7 +43,7 @@ export const Modal: React.FC<Props> = ({
     focusOnRender: shouldFocusAfterRender,
     returnFocus: shouldReturnFocusAfterClose
   });
-  return open ? (
+  return isOpen ? (
     <ModalPortal id={id}>
       <Overlay onClick={onOverlayClick}>
         <UIModal role={role} ref={modalRef}>

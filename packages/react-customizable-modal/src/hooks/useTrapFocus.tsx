@@ -12,6 +12,9 @@ type optionsType = {
 export function useTrapFocus(opts?: optionsType) {
   const options = opts ? { ...optionsDefault, ...opts } : optionsDefault;
   const ref = useRef<HTMLDivElement>(null);
+  if (typeof window === `undefined`) {
+    return ref;
+  }
   const previouseFocusedElement = useRef<HTMLElement>(
     document.activeElement as HTMLElement
   );

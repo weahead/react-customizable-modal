@@ -6,18 +6,18 @@ interface Props {
 }
 
 export const ModalPortal: React.FC<Props> = ({ id, children }) => {
-
+  if (typeof window === `undefined`) {
+    return null;
+  }
   const domNode = useRef<HTMLElement>(getOrCreateElementById(id));
-  console.log(domNode)
+  console.log(domNode);
   useEffect(() => {
-
     return () => {
       // remove the div on unmount
-      document.body.removeChild(domNode.current)
+      document.body.removeChild(domNode.current);
     };
-  }, [id])
-  return ReactDOM.createPortal(children, domNode.current)
-
+  }, [id]);
+  return ReactDOM.createPortal(children, domNode.current);
 };
 
 function getOrCreateElementById(id: string): HTMLElement {
@@ -28,6 +28,6 @@ function getOrCreateElementById(id: string): HTMLElement {
     let element = document.createElement("div");
     element.id = id;
     document.body.appendChild(element);
-    return element
+    return element;
   }
 }
