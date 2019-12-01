@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/weahead/react-customizable-modal/compare/v1.1.0...v1.2.0) (2019-12-01)
+
+
+### Features
+
+* add check to enable use in gatsby projects ([62b943b](https://github.com/weahead/react-customizable-modal/commit/62b943b9c299a8af8d5915229cfed67f62348328))
+* add gatsby example project ([33ec797](https://github.com/weahead/react-customizable-modal/commit/33ec797bba88b2aba00ec514251f2a89f37d9197))
+
+
+### Bug Fixes
+
+* remove old example code ([420c8f9](https://github.com/weahead/react-customizable-modal/commit/420c8f9d4b4d49ae7bdded7673b11b1fc2a49737))
+* update lockfile ([675bfeb](https://github.com/weahead/react-customizable-modal/commit/675bfeb03f7b4ddcfca610bd520e825abf866b4a))
+
 ## 1.1.0 (2019-12-01)
 
 
