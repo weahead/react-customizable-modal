@@ -1,9 +1,14 @@
 import React from "react";
 import { useSpring, animated } from "react-spring";
-import { useTrapFocus, useBodyScrollLock } from "react-customizable-modal";
+import {
+  useTrapFocus,
+  useBodyScrollLock,
+  useCloseOnEsc
+} from "react-customizable-modal";
 
 export default function AnimatedModal({ onClose }) {
   useBodyScrollLock();
+  useCloseOnEsc(onClose);
   const modalRef = useTrapFocus();
   const overlayProps = useSpring({
     backgroundColor: "rgba(0,0,0,0.6)",

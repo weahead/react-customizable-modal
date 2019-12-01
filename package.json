@@ -6,6 +6,7 @@
   "scripts": {
     "bs": "yarn",
     "start": "cd ./packages/react-customizable-modal/ && yarn run build-watch",
-    "build": "cd ./packages/react-customizable-modal/ && yarn run build"
+    "build": "cd ./packages/react-customizable-modal/ && yarn run build",
+    "publish": "cd ./packages/react-customizable-modal/ && yarn publish"
   }
 }
