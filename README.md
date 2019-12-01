@@ -142,17 +142,6 @@ function App() {
     </div>
   );
 }
-
-function Modal({ onClose }) {
-  return (
-    <ModalPortal>
-      <div>
-        This is my modal
-        <button onClick={onClose}>Close</button>
-      </div>
-    </ModalPortal>
-  );
-}
 ```
 
 ## Installation
