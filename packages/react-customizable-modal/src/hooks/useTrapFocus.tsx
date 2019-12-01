@@ -4,11 +4,12 @@ import findTabbable, { tabbable } from "../helpers/tabbable";
 import { useHandleKeyPress } from "./useHandleKeyPress";
 
 const TAB_KEY = 9;
-
-export function useTrapFocus(options: {
-  focusOnRender: boolean
-  returnFocus: boolean
+const optionsDefault = { focusOnRender: true, returnFocus: true };
+export function useTrapFocus(opts: {
+  focusOnRender: boolean;
+  returnFocus: boolean;
 }) {
+  const options = opts ? { ...optionsDefault, ...opts } : optionsDefault;
   const ref = useRef<HTMLDivElement>(null);
   const previouseFocusedElement = useRef<HTMLElement>(
     document.activeElement as HTMLElement
@@ -27,7 +28,10 @@ export function useTrapFocus(options: {
       setTabbableElements(focusableChildNodes);
     }
     return () => {
-      if (previouseFocusedElement.current instanceof HTMLElement && options.returnFocus) {
+      if (
+        previouseFocusedElement.current instanceof HTMLElement &&
+        options.returnFocus
+      ) {
         previouseFocusedElement.current.focus();
       }
     };
@@ -64,7 +68,7 @@ export function useTrapFocus(options: {
     },
     [ref, tabbableElements]
   );
-  useHandleKeyPress(handleUserKeyPress)
+  useHandleKeyPress(handleUserKeyPress);
 
   return ref;
 }
