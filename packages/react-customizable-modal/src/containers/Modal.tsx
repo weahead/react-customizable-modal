@@ -12,7 +12,7 @@ interface Props {
     ariaHideApp: boolean;
     shouldFocusAfterRender: boolean;
     onEscape: Function;
-    onOverlayClick: Function;
+    onOverlayClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
     shouldReturnFocusAfterClose: boolean;
 }
 const ESC = 27
