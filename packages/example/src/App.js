@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import AnimatedModal from "./components/animatedModal";
 import WobblyModal from "./components/wobblyModal";
-import { ModalPortal, Modal } from "react-customizable-modal";
+import { ModalPortal, Modal } from "@weahead/react-customizable-modal";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
