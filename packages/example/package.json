@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@weahead/react-customizable-modal": "1.2.1",
     "react": "^16.10.2",
-    "react-customizable-modal": "1.0.0",
     "react-dom": "^16.10.2",
     "react-scripts": "3.2.0",
     "react-spring": "^8.0.27"

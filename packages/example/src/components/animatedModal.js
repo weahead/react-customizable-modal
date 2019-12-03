@@ -4,7 +4,7 @@ import {
   useTrapFocus,
   useBodyScrollLock,
   useCloseOnEsc
-} from "react-customizable-modal";
+} from "@weahead/react-customizable-modal";
 
 export default function AnimatedModal({ onClose }) {
   useBodyScrollLock();
