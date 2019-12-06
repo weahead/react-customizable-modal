@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import AnimatedModal from "./components/animatedModal";
+import SwipeInFromBelowModal from "./components/SwipeInFromBelowModal";
 import WobblyModal from "./components/wobblyModal";
 import { ModalPortal, Modal } from "@weahead/react-customizable-modal";
 
@@ -9,6 +10,7 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const [isOpen3, setIsOpen3] = useState(false);
+  const [isOpen4, setIsOpen4] = useState(false);
 
   return (
     <div className="App">
@@ -35,6 +37,13 @@ function App() {
           }}
         >
           Open wobbly modal
+        </button>
+        <button
+          onClick={() => {
+            setIsOpen4(true);
+          }}
+        >
+          Open swipe in from below
         </button>
         {isOpen && (
           <Modal
@@ -71,6 +80,13 @@ function App() {
                 setIsOpen3(false);
               }}
             ></WobblyModal>
+          </ModalPortal>
+        )}
+        {isOpen4 && (
+          <ModalPortal id={"modal-root2"}>
+            <SwipeInFromBelowModal handleOnClose={() => {
+              setIsOpen4(false)
+            }} />
           </ModalPortal>
         )}
         <br />
