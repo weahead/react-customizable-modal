@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef } from 'react';
 //@ts-ignore
-import findTabbable, { tabbable } from "../helpers/tabbable";
-import { useHandleKeyPress } from "./useHandleKeyPress";
+import findTabbable from '../helpers/tabbable';
+import { useHandleKeyPress } from './useHandleKeyPress';
 
 const TAB_KEY = 9;
 const optionsDefault = { focusOnRender: true, returnFocus: true };
@@ -12,15 +12,13 @@ type optionsType = {
 export function useTrapFocus(opts?: optionsType) {
   const options = opts ? { ...optionsDefault, ...opts } : optionsDefault;
   const ref = useRef<HTMLDivElement>(null);
-  if (typeof window === `undefined`) {
-    return ref;
-  }
   const previouseFocusedElement = useRef<HTMLElement>(
     document.activeElement as HTMLElement
   );
   const [tabbableElements, setTabbableElements] = useState<HTMLElement[]>([]);
   // Handle initial focus of the referenced element, and return focus to previously focused element on cleanup
   // and find all the tabbable elements in the referenced element
+
   useEffect(() => {
     const { current } = ref;
     if (current) {
@@ -32,14 +30,12 @@ export function useTrapFocus(opts?: optionsType) {
       setTabbableElements(focusableChildNodes);
     }
     return () => {
-      if (
-        previouseFocusedElement.current instanceof HTMLElement &&
-        options.returnFocus
-      ) {
-        previouseFocusedElement.current.focus();
+      const { current } = previouseFocusedElement;
+      if (current instanceof HTMLElement && options.returnFocus) {
+        current.focus();
       }
     };
-  }, [ref, setTabbableElements]);
+  }, [options.focusOnRender, options.returnFocus, ref, setTabbableElements]);
 
   const handleUserKeyPress = useCallback(
     event => {

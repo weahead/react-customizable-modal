@@ -26,7 +26,7 @@ it('should loop focus back to the first element on tab', () => {
       <div
         ref={elementRef}
         id={'container'}
-        data-testId={'container'}
+        data-testid={'container'}
         tabIndex={-1}
       >
         <input id={'first-input'} type={'text'} />
