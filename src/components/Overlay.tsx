@@ -1,12 +1,9 @@
 import React from 'react';
-interface Props {
-  onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-}
+interface Props {}
 
-export const Overlay: React.FC<Props> = ({ onClick, children }) => {
+export const Overlay: React.FC<Props> = ({ children }) => {
   return (
     <div
-      onClick={onClick}
       style={{
         position: 'fixed',
         top: 0,
