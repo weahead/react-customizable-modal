@@ -5,7 +5,7 @@ import logo from './logo.svg';
 import AnimatedModal from './components/animatedModal';
 import SwipeInFromBelowModal from './components/SwipeInFromBelowModal';
 import WobblyModal from './components/wobblyModal';
-import { ModalPortal, Modal } from '../';
+import { ModalPortal, Modal } from '../src';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
