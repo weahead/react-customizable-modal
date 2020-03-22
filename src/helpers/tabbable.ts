@@ -21,8 +21,8 @@ function hidesContents(element: HTMLElement) {
   // Otherwise we need to check some styles
   const style = window.getComputedStyle(element);
   return zeroSize
-    ? style.getPropertyValue("overflow") !== "visible"
-    : style.getPropertyValue("display") == "none";
+    ? style.getPropertyValue('overflow') !== 'visible'
+    : style.getPropertyValue('display') === 'none';
 }
 
 function visible(element: any) {
@@ -41,12 +41,12 @@ export function focusable(element: HTMLElement, isTabIndexNotNaN: boolean) {
     //@ts-ignore
     (tabbableNode.test(nodeName) && !element.disabled) ||
     //@ts-ignore
-    (nodeName === "a" ? element.href || isTabIndexNotNaN : isTabIndexNotNaN);
+    (nodeName === 'a' ? element.href || isTabIndexNotNaN : isTabIndexNotNaN);
   return res && visible(element);
 }
 
 export function tabbable(element: HTMLElement) {
-  let tabIndex = element.getAttribute("tabindex");
+  let tabIndex = element.getAttribute('tabindex');
   //@ts-ignore
   if (tabIndex === null) tabIndex = undefined;
   //@ts-ignore
@@ -58,5 +58,5 @@ export function tabbable(element: HTMLElement) {
 export default function findTabbableDescendants(
   element: HTMLElement
 ): HTMLElement[] {
-  return [].slice.call(element.querySelectorAll("*"), 0).filter(tabbable);
+  return [].slice.call(element.querySelectorAll('*'), 0).filter(tabbable);
 }
