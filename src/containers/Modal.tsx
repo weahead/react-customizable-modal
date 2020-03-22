@@ -34,7 +34,7 @@ export const Modal: React.FC<Props> = ({
         onEscape();
       }
     },
-    [onEscape]
+    [isOpen, onEscape]
   );
   useHandleKeyPress(handleOnEsc);
   useBodyScrollLock();

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect } from 'react';
 
 /**
  * set aria-hidden attribute on element with id
@@ -9,11 +9,11 @@ export function useAriaHide(appElementId: string) {
   useEffect(() => {
     const { current: appElement } = appElementRef;
     if (appElement) {
-      appElement.setAttribute("aria-hidden", "true");
+      appElement.setAttribute('aria-hidden', 'true');
     }
     return () => {
       if (appElement) {
-        appElement.removeAttribute("aria-hidden");
+        appElement.removeAttribute('aria-hidden');
       }
     };
   }, []);
