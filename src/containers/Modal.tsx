@@ -36,18 +36,25 @@ export const Modal: React.FC<Props> = ({
     [onEscape]
   );
   useHandleKeyPress(handleOnEsc);
-  useBodyScrollLock();
   const modalRef = useTrapFocus({
     focusOnRender: shouldFocusAfterRender,
     returnFocus: shouldReturnFocusAfterClose,
   });
   return isOpen ? (
     <ModalPortal id={id}>
-      <Overlay onClick={onOverlayClick}>
-        <UIModal role={role} ref={modalRef}>
-          {children}
-        </UIModal>
-      </Overlay>
+      <ModalWrapper>
+        <Overlay onClick={onOverlayClick}>
+          <UIModal role={role} ref={modalRef}>
+            {children}
+          </UIModal>
+        </Overlay>
+      </ModalWrapper>
     </ModalPortal>
   ) : null;
+};
+// so not to set the overflow on body before the modal acctually mounts
+// FIXES: https://github.com/weahead/react-customizable-modal/issues/4
+const ModalWrapper: React.FC<{}> = props => {
+  useBodyScrollLock();
+  return <>{props.children}</>;
 };
