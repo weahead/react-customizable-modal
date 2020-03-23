@@ -1,31 +1,37 @@
-import React, { useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
+import React, { useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
 
 interface Props {
   id: string;
 }
 
 export const ModalPortal: React.FC<Props> = ({ id, children }) => {
-  if (typeof window === `undefined`) {
-    return null;
-  }
-  const domNode = useRef<HTMLElement>(getOrCreateElementById(id));
-  console.log(domNode);
+  const domNode = useRef<HTMLElement | null>(getOrCreateElementById(id));
   useEffect(() => {
     return () => {
       // remove the div on unmount
-      document.body.removeChild(domNode.current);
+      const { current } = domNode;
+      if (current) {
+        document.body.removeChild(current);
+      }
     };
   }, [id]);
-  return ReactDOM.createPortal(children, domNode.current);
+  if (domNode.current) {
+    return ReactDOM.createPortal(children, domNode.current);
+  } else {
+    return null;
+  }
 };
 
-function getOrCreateElementById(id: string): HTMLElement {
+function getOrCreateElementById(id: string): HTMLElement | null {
+  if (typeof window === `undefined`) {
+    return null;
+  }
   const domNode = document.getElementById(id);
   if (domNode) {
     return domNode;
   } else {
-    let element = document.createElement("div");
+    let element = document.createElement('div');
     element.id = id;
     document.body.appendChild(element);
     return element;
