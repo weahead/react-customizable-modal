@@ -6,7 +6,7 @@ A fully customizable and accessable react modal with hook primitives.
 
 ## Motivation
 
-There are several modal implementations in react, but none of them offered the flexibility to have total controll of the components being rendered so that you could use what ever animation library we wanted.
+There are several modal implementations in react, but none of them offered the flexibility to have total control of the components being rendered so that you could use whichever animation library you want.
 
 <!-- ## Screenshots -->
 
@@ -177,7 +177,7 @@ a simple wrapper around `React.createPortal` function, but it also removes the d
 
 #### Modal
 
-A basic Modal component ready for use, if you dont want to implement your own. it uses only the hooks and components from this packagfe
+A basic Modal component ready for use, if you dont want to implement your own. it uses only the hooks and components from this package
 
 ##### Props
 
@@ -216,7 +216,7 @@ const modalRef = useTrapFocus(options);
 
 `import {useAriaHide} from '@weahead/react-customizable-modal'`
 
-sets the `aria-hidden` attribute on the element with the id passed in and removes is when the component that uses this hook is unmounted
+sets the `aria-hidden` attribute on the element with the id passed in and removes it when the component that uses this hook is unmounted
 
 ```jsx
 useAriaHide(id); //often `id` would be 'root'
