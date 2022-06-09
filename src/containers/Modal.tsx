@@ -5,6 +5,7 @@ import { Modal as UIModal } from '../components/UIModal';
 import { useBodyScrollLock } from '../hooks/useBodyScrollLock';
 import { useTrapFocus } from '../hooks/useTrapFocus';
 import { useHandleKeyPress } from '../hooks/useHandleKeyPress';
+import { useOnClickOutside } from '../hooks/useOnClickOutside';
 interface Props {
   id: string;
   isOpen: boolean;
@@ -40,6 +41,7 @@ export const Modal: React.FC<Props> = ({
     focusOnRender: shouldFocusAfterRender,
     returnFocus: shouldReturnFocusAfterClose,
   });
+  useOnClickOutside(modalRef, onOverlayClick);
   return isOpen ? (
     <ModalPortal id={id}>
       <ModalWrapper>

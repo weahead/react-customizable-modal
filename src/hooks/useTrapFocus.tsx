@@ -23,6 +23,7 @@ export function useTrapFocus(opts?: optionsType) {
   const [tabbableElements, setTabbableElements] = useState<HTMLElement[]>([]);
   // Handle initial focus of the referenced element, and return focus to previously focused element on cleanup
   // and find all the tabbable elements in the referenced element
+
   useEffect(() => {
     const { current } = ref;
     const { current: previouseFocused } = previouseFocusedElement;

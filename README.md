@@ -6,7 +6,7 @@ A fully customizable and accessable react modal with hook primitives.
 
 ## Motivation
 
-There are several modal implementations in react, but none of them offered the flexibility to have total controll of the components being rendered so that you could use what ever animation library we wanted.
+There are several modal implementations in react, but none of them offered the flexibility to have total control of the components being rendered so that you could use whichever animation library you want.
 
 <!-- ## Screenshots -->
 
@@ -26,7 +26,7 @@ There are several modal implementations in react, but none of them offered the f
 ### Basic Modal
 
 ```jsx
-import { Modal } from "@weahead/react-customizable-modal";
+import { Modal } from '@weahead/react-customizable-modal';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,26 +66,26 @@ function App() {
 `CustomModal.jsx`
 
 ```jsx
-import React from "react";
+import React from 'react';
 import {
   useTrapFocus,
   useBodyScrollLock,
   useCloseOnEsc,
-  ModalPortal
-} from "react-customizable-modal";
+  ModalPortal,
+} from 'react-customizable-modal';
 
 function Overlay({ children }) {
   return (
     <div
       style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        position: "fixed",
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'fixed',
         top: 0,
         bottom: 0,
         left: 0,
-        right: 0
+        right: 0,
       }}
     >
       {children}
@@ -106,9 +106,9 @@ export default function CustomModal({ isOpen, onClose, children }) {
             style={{
               width: 500,
               height: 400,
-              backgroundColor: "#fff",
+              backgroundColor: '#fff',
               padding: 20,
-              position: "absolute"
+              position: 'absolute',
             }}
           >
             <button onClick={onClose}>Close modal</button>
@@ -124,7 +124,7 @@ export default function CustomModal({ isOpen, onClose, children }) {
 `App.jsx`
 
 ```jsx
-import CustomModal from "CustomModal.jsx";
+import CustomModal from 'CustomModal.jsx';
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -177,7 +177,7 @@ a simple wrapper around `React.createPortal` function, but it also removes the d
 
 #### Modal
 
-A basic Modal component ready for use, if you dont want to implement your own. it uses only the hooks and components from this packagfe
+A basic Modal component ready for use, if you dont want to implement your own. it uses only the hooks and components from this package
 
 ##### Props
 
@@ -216,7 +216,7 @@ const modalRef = useTrapFocus(options);
 
 `import {useAriaHide} from '@weahead/react-customizable-modal'`
 
-sets the `aria-hidden` attribute on the element with the id passed in and removes is when the component that uses this hook is unmounted
+sets the `aria-hidden` attribute on the element with the id passed in and removes it when the component that uses this hook is unmounted
 
 ```jsx
 useAriaHide(id); //often `id` would be 'root'
@@ -262,13 +262,30 @@ this hook is used by the `useHandleKeyPress` hook but only triggers the callback
 
 ```jsx
 useCloseOnEsc(() => {
-  console.log("ESC key was pressed");
+  console.log('ESC key was pressed');
 });
 ```
 
 | argument | required | description                        |
 | -------- | -------- | ---------------------------------- |
 | callback | yes      | gets called when escape is pressed |
+
+#### useOnClickOutside
+
+`import {useOnClickOutside} from '@weahead/react-customizable-modal'`
+
+this hook is used by the `useOnClickOutside` hook but only triggers the callback if the escape key is pressed
+
+```jsx
+useOnClickOutside(ref, () => {
+  console.log('you pressed outside of the desired element');
+});
+```
+
+| argument | required | description                                                                                                |
+| -------- | -------- | ---------------------------------------------------------------------------------------------------------- |
+| ref      | yes      | the refrence to the element that when a click outside of that element is triggered, the callback will fire |
+| callback | yes      | the callback to be triggered, when a click event outside of the referenced element happens                 |
 
 <!-- ## Tests -->
 
