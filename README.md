@@ -17,9 +17,9 @@ There are several modal implementations in react, but none of them offered the f
 
 ## Demos
 
-[Default builtin Modal](https://codesandbox.io/s/currying-moon-2251f)
-[Animated modal with react-spring](https://codesandbox.io/s/solitary-pond-b5kw3)
-[Swipe up from below ](https://codesandbox.io/s/bold-murdock-86ysz)
+* [Default builtin Modal](https://codesandbox.io/s/currying-moon-2251f)
+* [Animated modal with react-spring](https://codesandbox.io/s/solitary-pond-b5kw3)
+* [Swipe up from below ](https://codesandbox.io/s/bold-murdock-86ysz)
 
 ## Code Examples
 

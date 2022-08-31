@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 export function useHandleKeyPress(callback: (event: KeyboardEvent) => void) {
   useEffect(() => {
     window.addEventListener('keydown', callback);

@@ -1,6 +1,10 @@
-import React from 'react';
+import type { PropsWithChildren } from "react";
 
-export const Overlay: React.FC = ({ children }) => {
+export type OverlayProps = PropsWithChildren & {
+  onClick: (event: MouseEvent | TouchEvent) => void
+}
+
+export function Overlay({ children }: OverlayProps) {
   return (
     <div
       style={{

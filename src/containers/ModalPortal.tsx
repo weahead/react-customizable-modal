@@ -1,39 +1,45 @@
-import React, { useEffect, useRef } from 'react';
-import ReactDOM from 'react-dom';
+import { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
-interface Props {
-  id: string;
+import type { PropsWithChildren } from 'react'
+
+export type ModalPortalProps = PropsWithChildren & {
+  id: string
 }
 
-export const ModalPortal: React.FC<Props> = ({ id, children }) => {
-  const domNode = useRef<HTMLElement | null>(getOrCreateElementById(id));
-  useEffect(() => {
-    return () => {
-      // remove the div on unmount
-      const { current } = domNode;
-      if (current) {
-        document.body.removeChild(current);
-      }
-    };
-  }, [id]);
-  if (domNode.current) {
-    return ReactDOM.createPortal(children, domNode.current);
-  } else {
-    return null;
-  }
-};
+const isBrowser = typeof window !== 'undefined'
 
-function getOrCreateElementById(id: string): HTMLElement | null {
-  if (typeof window === `undefined`) {
-    return null;
+export const ModalPortal = ({ id, children }: ModalPortalProps) => {
+  const target = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    let container = document.getElementById(id)
+    if (!container) {
+      container = document.createElement('div')
+      container.setAttribute('id', id)
+      document.body.appendChild(container)
+    }
+
+    if (target.current) {
+      container.appendChild(target.current)
+    }
+
+    return () => {
+      if (target.current) {
+        target.current.remove()
+      }
+      if (container && container.childNodes.length === 0) {
+        container.remove()
+      }
+    }
+  }, [id])
+
+  if (!isBrowser) {
+    return null
   }
-  const domNode = document.getElementById(id);
-  if (domNode) {
-    return domNode;
-  } else {
-    let element = document.createElement('div');
-    element.id = id;
-    document.body.appendChild(element);
-    return element;
+
+  if (!target.current) {
+    target.current = document.createElement("div");
   }
+  return createPortal(children, target.current)
 }

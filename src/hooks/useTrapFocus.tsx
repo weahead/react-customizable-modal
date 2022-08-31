@@ -1,86 +1,86 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-//@ts-ignore
-import findTabbable from '../helpers/tabbable';
+import { tabbable } from 'tabbable';
+
 import { useHandleKeyPress } from './useHandleKeyPress';
 
-const TAB_KEY = 9;
-const optionsDefault = { focusOnRender: true, returnFocus: true };
-type optionsType = {
+import type { FocusableElement } from 'tabbable'
+
+function isWithinCurrentElementScope(
+  elementList: (Element | null)[]
+) {
+  return elementList.includes(document.activeElement);
+}
+
+export type useTrapFocusOptions = {
   focusOnRender?: boolean;
   returnFocus?: boolean;
 };
-export function useTrapFocus(opts?: optionsType) {
-  const { focusOnRender, returnFocus } = opts
-    ? { ...optionsDefault, ...opts }
-    : optionsDefault;
-  const ref = useRef<HTMLDivElement>(null);
 
-  const previouseFocusedElement = useRef<HTMLElement | null>(
+export function useTrapFocus<T extends HTMLElement>(options?: useTrapFocusOptions) {
+  const {focusOnRender = true, returnFocus = true} = options || {}
+
+  const ref = useRef<T>(null);
+
+  const previousFocusedElement = useRef<Element | null>(
     typeof window === `undefined`
       ? null
-      : (document.activeElement as HTMLElement)
+      : (document.activeElement)
   );
-  const [tabbableElements, setTabbableElements] = useState<HTMLElement[]>([]);
+
+  const [tabbableElements, setTabbableElements] = useState<FocusableElement[]>([]);
+
   // Handle initial focus of the referenced element, and return focus to previously focused element on cleanup
   // and find all the tabbable elements in the referenced element
-
   useEffect(() => {
     const { current } = ref;
-    const { current: previouseFocused } = previouseFocusedElement;
+    const { current: previousFocused } = previousFocusedElement;
 
     if (current) {
-      const focusableChildNodes = findTabbable(current);
-      if (focusOnRender) {
+      const focusableChildNodes = tabbable(current, { includeContainer: true});
+      if (focusOnRender && focusableChildNodes.includes(current)) {
         current.focus();
       }
-
       setTabbableElements(focusableChildNodes);
     }
+
     return () => {
-      if (previouseFocused instanceof HTMLElement && returnFocus) {
-        previouseFocused.focus();
+      if (previousFocused instanceof HTMLElement && returnFocus) {
+        previousFocused.focus();
       }
     };
   }, [ref, setTabbableElements, focusOnRender, returnFocus]);
 
-  const handleUserKeyPress = useCallback(
+  useHandleKeyPress(useCallback(
     event => {
-      const { keyCode, shiftKey } = event;
-      const first = tabbableElements[0];
-      const last = tabbableElements[tabbableElements.length - 1];
-      const currentActiveElement = document.activeElement;
-      // Scope current tabs to current root element
-      if (isWithinCurrentElementScope([...tabbableElements, ref.current])) {
-        if (keyCode === TAB_KEY) {
-          if (
-            currentActiveElement === first ||
-            currentActiveElement === ref.current
-          ) {
-            // move focus to last element if shift+tab while currently focusing the first tabbable element
-            if (shiftKey) {
-              event.preventDefault();
-              last.focus();
+      if (tabbableElements.length > 0) {
+        // Scope current tabs to current root element
+        if (isWithinCurrentElementScope(tabbableElements)) {
+          const { key, shiftKey } = event;
+          if (key === "Tab") {
+            const first = tabbableElements[0];
+            const last = tabbableElements[tabbableElements.length - 1];
+            const activeElement = document.activeElement;
+
+            if (activeElement === first || activeElement === ref.current) {
+              // move focus to last element if shift+tab while currently focusing the first tabbable element
+              if (shiftKey) {
+                event.preventDefault();
+                last.focus();
+              }
             }
-          }
-          if (currentActiveElement === last) {
-            // move focus back to first if tabbing while currently focusing the last tabbable element
-            if (!shiftKey) {
-              event.preventDefault();
-              first.focus();
+            if (activeElement === last) {
+              // move focus back to first if tabbing while currently focusing the last tabbable element
+              if (!shiftKey) {
+                event.preventDefault();
+                first.focus();
+              }
             }
           }
         }
       }
     },
     [ref, tabbableElements]
-  );
-  useHandleKeyPress(handleUserKeyPress);
+  ));
 
   return ref;
-}
-function isWithinCurrentElementScope(
-  elementList: (HTMLInputElement | Element | null)[]
-) {
-  const currentActiveElement = document.activeElement;
-  return elementList.includes(currentActiveElement);
 }
