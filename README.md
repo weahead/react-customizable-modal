@@ -17,24 +17,24 @@ There are several modal implementations in react, but none of them offered the f
 
 ## Demos
 
-* [Default builtin Modal](https://codesandbox.io/s/currying-moon-2251f)
-* [Animated modal with react-spring](https://codesandbox.io/s/solitary-pond-b5kw3)
-* [Swipe up from below ](https://codesandbox.io/s/bold-murdock-86ysz)
+- [Default builtin Modal](https://codesandbox.io/s/currying-moon-2251f)
+- [Animated modal with react-spring](https://codesandbox.io/s/solitary-pond-b5kw3)
+- [Swipe up from below ](https://codesandbox.io/s/bold-murdock-86ysz)
 
 ## Code Examples
 
 ### Basic Modal
 
 ```jsx
-import { Modal } from '@weahead/react-customizable-modal';
+import { Modal } from '@weahead/react-customizable-modal'
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
   return (
     <div>
       <button
         onClick={() => {
-          setIsOpen(true);
+          setIsOpen(true)
         }}
       >
         Open modal
@@ -42,22 +42,22 @@ function App() {
       <Modal
         isOpen={isOpen}
         onEscape={() => {
-          setIsOpen(false);
+          setIsOpen(false)
         }}
         onOverlayClick={() => {
-          setIsOpen(false);
+          setIsOpen(false)
         }}
       >
         <button
           onClick={() => {
-            setIsOpen(false);
+            setIsOpen(false)
           }}
         >
           Close
         </button>
       </Modal>
     </div>
-  );
+  )
 }
 ```
 
@@ -66,13 +66,13 @@ function App() {
 `CustomModal.jsx`
 
 ```jsx
-import React from 'react';
+import React from 'react'
 import {
   useTrapFocus,
   useBodyScrollLock,
   useCloseOnEsc,
   ModalPortal,
-} from 'react-customizable-modal';
+} from 'react-customizable-modal'
 
 function Overlay({ children }) {
   return (
@@ -90,48 +90,54 @@ function Overlay({ children }) {
     >
       {children}
     </div>
-  );
+  )
+}
+
+function ModalWrapper({ children }) {
+  useBodyScrollLock()
+  useCloseOnEsc(onClose)
+  return <>{children}</>
 }
 
 export default function CustomModal({ isOpen, onClose, children }) {
-  useBodyScrollLock();
-  useCloseOnEsc(onClose);
-  const modalRef = useTrapFocus();
+  const modalRef = useTrapFocus()
   return (
     isOpen && (
       <ModalPortal id={`customModal`}>
-        <Overlay>
-          <div
-            ref={modalRef}
-            style={{
-              width: 500,
-              height: 400,
-              backgroundColor: '#fff',
-              padding: 20,
-              position: 'absolute',
-            }}
-          >
-            <button onClick={onClose}>Close modal</button>
-            {children}
-          </div>
-        </Overlay>
+        <ModalWrapper>
+          <Overlay>
+            <div
+              ref={modalRef}
+              style={{
+                width: 500,
+                height: 400,
+                backgroundColor: '#fff',
+                padding: 20,
+                position: 'absolute',
+              }}
+            >
+              <button onClick={onClose}>Close modal</button>
+              {children}
+            </div>
+          </Overlay>
+        </ModalWrapper>
       </ModalPortal>
     )
-  );
+  )
 }
 ```
 
 `App.jsx`
 
 ```jsx
-import CustomModal from 'CustomModal.jsx';
+import CustomModal from 'CustomModal.jsx'
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
   return (
     <div>
       <button
         onClick={() => {
-          setIsOpen(true);
+          setIsOpen(true)
         }}
       >
         Open modal
@@ -140,13 +146,13 @@ function App() {
       <CustomModal
         isOpen={isOpen}
         onClose={() => {
-          setIsOpen(false);
+          setIsOpen(false)
         }}
       >
         This is a custom modal
       </CustomModal>
     </div>
-  );
+  )
 }
 ```
 
@@ -183,7 +189,7 @@ A basic Modal component ready for use, if you dont want to implement your own. i
 
 | Prop                        | Required | Description                                                                                                                                                           |
 | --------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id                          | yes      | this will give the DOMnode that is created to hold the modal content an `id` if there already is a DOMnode with that `id` it will reuse that for the new modal        |
+| id                          | no       | this will give the DOMnode that is created to hold the modal content an `id` if there already is a DOMnode with that `id` it will reuse that for the new modal        |
 | isOpen                      | yes      | this will be used to create the portal for the modal and mount the modal                                                                                              |
 | role                        | no       | for a11y purposes we can set the role for our modal, it defaults to `dialog`                                                                                          |
 | ariaHideApp                 | no       | sets a aria hide on the div with id of 'root'                                                                                                                         |
@@ -202,9 +208,9 @@ A basic Modal component ready for use, if you dont want to implement your own. i
 used to trap focus inside of the modal component
 
 ```jsx
-const modalRef = useTrapFocus(options);
+const modalRef = useTrapFocus(options)
 // returns a ref that needs to be given to the element that you want to trap focus within
-<div ref={modalRef}>focus will be trapped in this div</div>;
+;<div ref={modalRef}>focus will be trapped in this div</div>
 ```
 
 | option        | required | description                                                                                                   |
@@ -219,7 +225,7 @@ const modalRef = useTrapFocus(options);
 sets the `aria-hidden` attribute on the element with the id passed in and removes it when the component that uses this hook is unmounted
 
 ```jsx
-useAriaHide(id); //often `id` would be 'root'
+useAriaHide(id) //often `id` would be 'root'
 ```
 
 | argument | required | description                                              |
@@ -234,7 +240,7 @@ this is taken from [usehooks](https://usehooks.com/useLockBodyScroll/) all credi
 it locks the body from scrolling while the component that uses this hook is rendered.
 
 ```jsx
-useBodyScrollLock();
+useBodyScrollLock()
 ```
 
 #### useHandleKeyPress
@@ -245,9 +251,9 @@ this hook is used by the `useCloseOnEsc` hook and other internal components
 it lets you provide a function that is executed on every keypress while the component that uses this hook is mounted
 
 ```jsx
-useHandleKeyPress(e => {
-  console.log(e.keyCode);
-});
+useHandleKeyPress((e) => {
+  console.log(e.key)
+})
 ```
 
 | argument | required | description                     |
@@ -262,8 +268,8 @@ this hook is used by the `useHandleKeyPress` hook but only triggers the callback
 
 ```jsx
 useCloseOnEsc(() => {
-  console.log('ESC key was pressed');
-});
+  console.log('ESC key was pressed')
+})
 ```
 
 | argument | required | description                        |
@@ -278,8 +284,8 @@ this hook is used by the `useOnClickOutside` hook but only triggers the callback
 
 ```jsx
 useOnClickOutside(ref, () => {
-  console.log('you pressed outside of the desired element');
-});
+  console.log('you pressed outside of the desired element')
+})
 ```
 
 | argument | required | description                                                                                                |

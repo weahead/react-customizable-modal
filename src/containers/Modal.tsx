@@ -9,8 +9,8 @@ import type { PropsWithChildren } from 'react'
 import { useCloseOnEsc } from '../hooks/useCloseOnEsc'
 
 export type ModalProps = PropsWithChildren & {
-  onEscape: Function
-  onOverlayClick: (event: MouseEvent | TouchEvent) => void
+  onEscape?: Function
+  onOverlayClick?: (event: MouseEvent | TouchEvent) => void
   id?: string
   isOpen?: boolean
   role?: string
@@ -36,7 +36,7 @@ export function Modal({
   shouldReturnFocusAfterClose = true,
 }: ModalProps) {
   useCloseOnEsc(() => {
-    if (isOpen) {
+    if (isOpen && typeof onEscape === 'function') {
       onEscape()
     }
   })
@@ -46,12 +46,18 @@ export function Modal({
     returnFocus: shouldReturnFocusAfterClose,
   })
 
-  useOnClickOutside(modalRef, onOverlayClick)
+  const handleOverlayClick: ModalProps['onOverlayClick'] = (evt) => {
+    if (typeof onOverlayClick === 'function') {
+      onOverlayClick(evt)
+    }
+  }
+
+  useOnClickOutside(modalRef, handleOverlayClick)
 
   return isOpen ? (
     <ModalPortal id={id}>
       <ModalWrapper>
-        <Overlay onClick={onOverlayClick}>
+        <Overlay onClick={handleOverlayClick}>
           <UIModal role={role} ref={modalRef}>
             {children}
           </UIModal>
