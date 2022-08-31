@@ -1,3 +1,10 @@
+# [2.0.0-rc.3](https://github.com/weahead/react-customizable-modal/compare/v2.0.0-rc.2...v2.0.0-rc.3) (2022-08-31)
+
+
+### Features
+
+* proper package name ([744dfa4](https://github.com/weahead/react-customizable-modal/commit/744dfa42987f1741f6368e0d7707f41d645c14f5))
+
 # [2.0.0-rc.2](https://github.com/weahead/react-customizable-modal/compare/v2.0.0-rc.1...v2.0.0-rc.2) (2022-08-31)
 
 
