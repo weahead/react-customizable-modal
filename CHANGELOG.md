@@ -1,3 +1,15 @@
+# [2.0.0-rc.1](https://github.com/weahead/react-customizable-modal/compare/v1.3.0-rc.1...v2.0.0-rc.1) (2022-08-31)
+
+
+### Features
+
+* major bump ([e1e98fb](https://github.com/weahead/react-customizable-modal/commit/e1e98fb18de5dba2b6a7b9bd272199bf4b3cae07))
+
+
+### BREAKING CHANGES
+
+* bump major
+
 # [1.3.0-rc.1](https://github.com/weahead/react-customizable-modal/compare/v1.2.1...v1.3.0-rc.1) (2022-08-31)
 
 
