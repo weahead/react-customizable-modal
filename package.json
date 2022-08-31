@@ -21,8 +21,7 @@
     "dev:main": "vite build --emptyOutDir=false --watch",
     "dev:examples": "vite -c vite.config.ts examples",
     "build": "vite build",
-    "test": "vitest -c vite.config.ts",
-    "prepare": "npm run build"
+    "test": "vitest -c vite.config.ts"
   },
   "peerDependencies": {
     "react": ">=16.8",
