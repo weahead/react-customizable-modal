@@ -5,6 +5,9 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/main.cjs.js",
   "module": "dist/main.es.js",
   "types": "dist/main.d.ts",
