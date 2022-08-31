@@ -1,10 +1,12 @@
-import React, { ReactNode } from 'react';
-interface Props {
-  role: string;
-  children: ReactNode;
+import { forwardRef } from 'react';
+
+import type { PropsWithChildren } from 'react'
+
+export type ModalProps = PropsWithChildren & {
+  role: string
 }
 
-export const Modal = React.forwardRef<HTMLDivElement, Props>(
+export const Modal = forwardRef<HTMLDivElement, ModalProps>(
   ({ role, children }, ref) => {
     return (
       <div
