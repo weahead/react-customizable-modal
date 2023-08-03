@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 interface Props {
   onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
-export const Overlay: React.FC<Props> = ({ onClick, children }) => {
+export const Overlay: React.FC<PropsWithChildren<Props>> = ({
+  children,
+  onClick,
+}) => {
   return (
     <div
       onClick={onClick}

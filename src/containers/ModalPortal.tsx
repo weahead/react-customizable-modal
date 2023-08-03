@@ -1,11 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { PropsWithChildren, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
 interface Props {
   id: string;
 }
 
-export const ModalPortal: React.FC<Props> = ({ id, children }) => {
+export const ModalPortal: React.FC<PropsWithChildren<Props>> = ({
+  children,
+  id,
+}) => {
   const domNode = useRef<HTMLElement>(getOrCreateElementById(id));
 
   useEffect(() => {

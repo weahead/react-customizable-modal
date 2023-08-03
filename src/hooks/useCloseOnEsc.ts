@@ -1,14 +1,14 @@
 import { useCallback } from 'react';
 import { useHandleKeyPress } from './useHandleKeyPress';
 
-const ESC = 27;
+const ESC = 'Escape';
 type onEscapeType = Function;
 
 export function useCloseOnEsc(onEscape: onEscapeType) {
   const handleOnEsc = useCallback(
-    event => {
-      const { keyCode } = event;
-      if (keyCode === ESC) {
+    (event: KeyboardEvent) => {
+      const { code } = event;
+      if (code === ESC) {
         onEscape();
       }
     },

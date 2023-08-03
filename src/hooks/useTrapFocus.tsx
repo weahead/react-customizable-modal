@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import findTabbable from '../helpers/tabbable';
 import { useHandleKeyPress } from './useHandleKeyPress';
 
-const TAB_KEY = 9;
+const TAB_KEY = 'Tab';
 const optionsDefault = { focusOnRender: true, returnFocus: true };
 type optionsType = {
   focusOnRender?: boolean;
@@ -38,14 +38,14 @@ export function useTrapFocus(opts?: optionsType) {
   }, [options.focusOnRender, options.returnFocus, ref, setTabbableElements]);
 
   const handleUserKeyPress = useCallback(
-    event => {
-      const { keyCode, shiftKey } = event;
+    (event: KeyboardEvent) => {
+      const { code, shiftKey } = event;
       const first = tabbableElements[0];
       const last = tabbableElements[tabbableElements.length - 1];
       const currentActiveElement = document.activeElement;
       // Scope current tabs to current root element
       if (isWithinCurrentElementScope([...tabbableElements, ref.current])) {
-        if (keyCode === TAB_KEY) {
+        if (code === TAB_KEY) {
           if (
             currentActiveElement === first ||
             currentActiveElement === ref.current

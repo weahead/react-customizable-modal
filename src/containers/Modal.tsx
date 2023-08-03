@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { PropsWithChildren, useCallback } from 'react';
 import { ModalPortal } from './ModalPortal';
 import { Overlay } from '../components/Overlay';
 import { Modal as UIModal } from '../components/UIModal';
@@ -14,8 +14,8 @@ interface Props {
   onOverlayClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   shouldReturnFocusAfterClose: boolean;
 }
-const ESC = 27;
-export const Modal: React.FC<Props> = ({
+const ESC = 'Escape';
+export const Modal: React.FC<PropsWithChildren<Props>> = ({
   id = 'modal-root',
   isOpen = false,
   role = 'dialog',
@@ -27,9 +27,9 @@ export const Modal: React.FC<Props> = ({
 }) => {
   //TODO: use useCloseOnEsc
   const handleOnEsc = useCallback(
-    event => {
-      const { keyCode } = event;
-      if (isOpen && keyCode === ESC) {
+    (event: KeyboardEvent) => {
+      const { code } = event;
+      if (isOpen && code === ESC) {
         onEscape();
       }
     },
