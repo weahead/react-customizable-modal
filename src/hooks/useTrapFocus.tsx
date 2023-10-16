@@ -4,12 +4,14 @@ import findTabbable from '../helpers/tabbable';
 import { useHandleKeyPress } from './useHandleKeyPress';
 
 const TAB_KEY = 'Tab';
-const optionsDefault = { focusOnRender: true, returnFocus: true };
-type optionsType = {
+type OptionsType = {
   focusOnRender?: boolean;
   returnFocus?: boolean;
+  additionalTrigger?: boolean;
 };
-export function useTrapFocus(opts?: optionsType) {
+const optionsDefault: OptionsType = { focusOnRender: true, returnFocus: true };
+
+export function useTrapFocus(opts?: OptionsType) {
   const options = opts ? { ...optionsDefault, ...opts } : optionsDefault;
   const ref = useRef<HTMLDivElement>(null);
   const previouseFocusedElement = useRef<HTMLElement>(
@@ -35,7 +37,13 @@ export function useTrapFocus(opts?: optionsType) {
         current.focus();
       }
     };
-  }, [options.focusOnRender, options.returnFocus, ref, setTabbableElements]);
+  }, [
+    options.focusOnRender,
+    options.returnFocus,
+    ref,
+    setTabbableElements,
+    options?.additionalTrigger,
+  ]);
 
   const handleUserKeyPress = useCallback(
     (event: KeyboardEvent) => {
