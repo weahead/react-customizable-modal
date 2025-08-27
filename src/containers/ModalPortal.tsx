@@ -1,38 +1,35 @@
-import React, { PropsWithChildren, useEffect, useRef } from 'react';
+import { useEffect, useState, ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 
 interface Props {
   id: string;
+  children: ReactNode;
 }
 
-export const ModalPortal: React.FC<PropsWithChildren<Props>> = ({
-  children,
-  id,
-}) => {
-  const domNode = useRef<HTMLElement>(getOrCreateElementById(id));
+export const ModalPortal = ({ children, id }: Props): JSX.Element | null => {
+  const [domNode, setDomNode] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
+    // Prevent execution in non-browser environments (e.g., during SSR)
+    if (typeof window === 'undefined') return;
+
+    let element = document.getElementById(id);
+
+    if (!element) {
+      element = document.createElement('div');
+      element.id = id;
+      document.body.appendChild(element);
+    }
+
+    setDomNode(element);
+
     return () => {
-      // remove the div on unmount
-      const { current } = domNode;
-      if (current) document.body.removeChild(current);
+      if (element) document.body.removeChild(element);
     };
   }, [id]);
-  if (domNode.current) return ReactDOM.createPortal(children, domNode.current);
-  return null;
-};
 
-function getOrCreateElementById(id: string): HTMLElement | null {
-  if (typeof window === `undefined`) {
-    return null;
-  }
-  const domNode = document.getElementById(id);
-  if (domNode) {
-    return domNode;
-  } else {
-    let element = document.createElement('div');
-    element.id = id;
-    document.body.appendChild(element);
-    return element;
-  }
-}
+  // Ensure safe rendering: Avoid rendering in SSR or if the DOM node hasn't been set yet
+  if (typeof window === 'undefined' || !domNode) return null;
+
+  return ReactDOM.createPortal(children, domNode);
+};
