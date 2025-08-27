@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
-import { useTrapFocus, useBodyScrollLock, useCloseOnEsc } from '../../.';
+import { useTrapFocus, useBodyScrollLock, useCloseOnEsc } from '@weahead/react-customizable-modal';
 
 const wrapperStyle = {
   display: 'flex',
