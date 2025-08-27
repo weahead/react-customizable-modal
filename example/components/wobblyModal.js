@@ -1,6 +1,5 @@
-import React from 'react';
 import { useSpring, animated, config } from 'react-spring';
-import { useTrapFocus, useBodyScrollLock } from '../../.';
+import { useTrapFocus, useBodyScrollLock } from '@weahead/react-customizable-modal';
 
 export default function WobblyModal({ onClose }) {
   useBodyScrollLock();
