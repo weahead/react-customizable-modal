@@ -3,6 +3,7 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import dts from 'vite-plugin-dts'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -14,10 +15,21 @@ export default defineConfig({
       fileName: 'index',
       name: 'React Customizable Modal',
     },
+    rollupOptions: {
+      external: ['react'],
+      output: {
+        globals: {
+          react: 'React',
+        },
+      },
+    },
   },
-  plugins: [react()],
+  plugins: [
+    dts({ tsconfigPath: './tsconfig.app.json' }),
+    react(),
+  ],
   test: {
-    environment: "jsdom",
+    environment: 'jsdom',
     globals: true,
     setupFiles: './tests/setup.ts'
   },
