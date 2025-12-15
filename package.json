@@ -3,7 +3,7 @@
   "description": "A fully customizable and accessable react modal with hook primitives.",
   "license": "MIT",
   "type": "module",
-  "version": "3.0.0-rc.2",
+  "version": "3.0.0-rc.3",
   "files": [
     "dist"
   ],
