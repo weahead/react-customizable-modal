@@ -5,7 +5,7 @@ interface Props {
 }
 
 export const Modal = React.forwardRef<HTMLDivElement, Props>(
-  ({ role, children }, ref) => {
+  function Modal({ role, children }, ref) {
     return (
       <div
         role={role}
