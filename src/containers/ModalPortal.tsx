@@ -1,4 +1,4 @@
-import { useEffect, useState, ReactNode } from 'react';
+import { useEffect, useState, type ReactNode, type ReactPortal } from 'react';
 import ReactDOM from 'react-dom';
 
 interface Props {
@@ -6,7 +6,7 @@ interface Props {
   children: ReactNode;
 }
 
-export const ModalPortal = ({ children, id }: Props): JSX.Element | null => {
+export const ModalPortal = ({ children, id }: Props): ReactPortal | null => {
   const [domNode, setDomNode] = useState<HTMLElement | null>(null);
 
   useEffect(() => {

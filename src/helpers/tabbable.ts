@@ -25,12 +25,13 @@ function hidesContents(element: HTMLElement) {
     : style.getPropertyValue('display') === 'none';
 }
 
-function visible(element: any) {
+function visible(element: HTMLElement) {
   let parentElement = element;
   while (parentElement) {
     if (parentElement === document.body) break;
     if (hidesContents(parentElement)) return false;
-    parentElement = parentElement.parentNode;
+    // @ts-expect-error elm.parentNode is of type ParentNode and not HTMLElement
+    parentElement = parentElement.parentNode
   }
   return true;
 }
@@ -38,20 +39,18 @@ function visible(element: any) {
 export function focusable(element: HTMLElement, isTabIndexNotNaN: boolean) {
   const nodeName = element.nodeName.toLowerCase();
   const res =
-    //@ts-ignore
+    // @ts-expect-error .disable is not part of HTMLElement
     (tabbableNode.test(nodeName) && !element.disabled) ||
-    //@ts-ignore
+    // @ts-expect-error .href is only applicable on anchor tags
     (nodeName === 'a' ? element.href || isTabIndexNotNaN : isTabIndexNotNaN);
   return res && visible(element);
 }
 
 export function tabbable(element: HTMLElement) {
-  let tabIndex = element.getAttribute('tabindex');
-  //@ts-ignore
+  let tabIndex: string | number | null | undefined = element.getAttribute('tabindex');
   if (tabIndex === null) tabIndex = undefined;
-  //@ts-ignore
+  tabIndex = Number(tabIndex)
   const isTabIndexNaN = isNaN(tabIndex);
-  //@ts-ignore
   return (isTabIndexNaN || tabIndex >= 0) && focusable(element, !isTabIndexNaN);
 }
 

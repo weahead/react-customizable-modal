@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useCallback } from 'react';
+import React, { type PropsWithChildren, useCallback } from 'react';
 import { ModalPortal } from './ModalPortal';
 import { Overlay } from '../components/Overlay';
 import { Modal as UIModal } from '../components/UIModal';
@@ -10,7 +10,7 @@ interface Props {
   isOpen: boolean;
   role: string;
   shouldFocusAfterRender: boolean;
-  onEscape: Function;
+  onEscape: () => void;
   onOverlayClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   shouldReturnFocusAfterClose: boolean;
 }

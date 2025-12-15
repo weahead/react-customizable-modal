@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-//@ts-ignore
 import findTabbable from '../helpers/tabbable';
 import { useHandleKeyPress } from './useHandleKeyPress';
 

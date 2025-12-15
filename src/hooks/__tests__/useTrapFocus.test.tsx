@@ -1,15 +1,13 @@
-import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { useTrapFocus } from '../useTrapFocus';
-// import "@testing-library/jest-dom/extend-expect";
 
 describe('useTrapFocus', () => {
   it('should focus on the container element if it is focusable', () => {
     function TestComponent() {
       const elementRef = useTrapFocus();
       return (
-        <div ref={elementRef} id={'container'} tabIndex={-1}>
-          <input id={'first-input'} type={'text'} />
+        <div ref={elementRef} id="container" tabIndex={-1}>
+          <input id="first-input" type="text" />
           <button>submit</button>
         </div>
       );
@@ -19,17 +17,18 @@ describe('useTrapFocus', () => {
     expect(activeElement.getAttribute('id')).toEqual('container');
   });
 });
+
 it('should loop focus back to the first element on tab', () => {
   function TestComponent2() {
     const elementRef = useTrapFocus();
     return (
       <div
         ref={elementRef}
-        id={'container'}
-        data-testid={'container'}
+        id="container"
+        data-testid="container"
         tabIndex={-1}
       >
-        <input id={'first-input'} type={'text'} />
+        <input id="first-input" type="text" />
         <button>submit</button>
       </div>
     );

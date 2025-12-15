@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useHandleKeyPress } from './useHandleKeyPress';
 
 const ESC = 'Escape';
-type onEscapeType = Function;
+type onEscapeType = () => void;
 
 export function useCloseOnEsc(onEscape: onEscapeType) {
   const handleOnEsc = useCallback(
